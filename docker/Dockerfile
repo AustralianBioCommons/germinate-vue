@@ -9,7 +9,7 @@ ADD https://api.github.com/repos/germinateplatform/germinate-vue/git/refs/heads/
 # Clone the Germinate server code and client code
 RUN echo "Pulling GitHub branch: $BRANCH"
 RUN apk add --no-cache git && \
-    git clone -b "$BRANCH" --single-branch --depth 1 https://github.com/germinateplatform/germinate-server.git /opt/germinate-server && \
+    git clone -b master --single-branch --depth 1 https://github.com/germinateplatform/germinate-server.git /opt/germinate-server && \
     git clone -b "$BRANCH" --single-branch --depth 1 https://github.com/AustralianBioCommons/germinate-vue.git /opt/germinate-client
 
 # Build the client code
