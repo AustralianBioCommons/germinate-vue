@@ -14,20 +14,49 @@
                   <p class="text-danger mt-3" v-if="response">{{ response }}</p>
                 </b-card-body>
               </b-card>
+
               <!-- Registration -->
-              <b-card no-body class="text-white bg-primary py-5" v-if="storeServerSettings && storeServerSettings.registrationEnabled">
+              <b-card
+                no-body
+                class="text-white bg-primary py-5"
+                v-if="storeServerSettings && storeServerSettings.registrationEnabled"
+              >
                 <b-card-body class="text-center">
                   <div>
                     <h2>{{ $t('widgetRegisterTitle') }}</h2>
-                    <p>{{ $t('widgetRegisterText') }}</p>
-                    <b-button variant="primary" class="active mt-3" @click="$refs.registrationModal.show()">{{ $t('buttonRegister') }}</b-button>
+
+                    <!-- Prefer HTML-capable blurb if provided, else fallback to plain text -->
+                    <p class="mb-0" v-if="registerBlurbHtml" v-html="registerBlurbHtml"></p>
+                    <p class="mb-0" v-else>{{ $t('widgetRegisterText') }}</p>
+
+                    <!-- Exactly one Register control -->
+                    <b-button
+                      v-if="externalRegisterUrl"
+                      :href="externalRegisterUrl"
+                      target="_blank"
+                      rel="noopener"
+                      variant="primary"
+                      class="active mt-3"
+                    >
+                      {{ $t('buttonRegister') }}
+                    </b-button>
+                    <b-button
+                      v-else
+                      variant="primary"
+                      class="active mt-3"
+                      @click="$refs.registrationModal.show()"
+                    >
+                      {{ $t('buttonRegister') }}
+                    </b-button>
                   </div>
                 </b-card-body>
               </b-card>
             </b-card-group>
           </b-col>
+
           <!-- Spacing -->
           <b-col lg=1 class="d-none d-lg-block"></b-col>
+
           <!-- Germinate logo -->
           <b-col lg=4>
             <div id="svg-logo-container" class="d-flex justify-content-center align-items-center h-100 py-3">
@@ -37,6 +66,7 @@
               <b-img id="svg-logo" src="./img/germinate-square-name.svg" fluid v-else />
             </div>
           </b-col>
+
           <!-- Horizontal logos below, same width as login+registration -->
           <b-col lg=7>
             <b-card no-body class="p-4 mt-3">
@@ -46,7 +76,7 @@
         </b-row>
       </div>
 
-      <!-- Registration modal -->
+      <!-- Registration modal (fallback path when no external URL is set) -->
       <RegistrationModal ref="registrationModal" v-if="storeServerSettings && storeServerSettings.registrationEnabled"/>
     </div>
   </div>
@@ -87,6 +117,18 @@ export default {
       } else {
         return false
       }
+    },
+    // If i18n key exists and resolves to a real URL, return it; otherwise null
+    externalRegisterUrl () {
+      const key = 'login.register.externalUrl'
+      const val = this.$t(key)
+      return val && val !== key ? String(val) : null
+    },
+    // Optional HTML-enabled blurb (renders with v-html)
+    registerBlurbHtml () {
+      const key = 'login.register.info'
+      const val = this.$t(key)
+      return val && val !== key ? String(val) : null
     }
   },
   beforeRouteEnter: function (to, from, next) {

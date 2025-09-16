@@ -2,7 +2,7 @@ FROM node:22.11-alpine3.20 AS builder
 
 LABEL maintainer="sebastian.raubach@hutton.ac.uk"
 
-ARG BRANCH=master
+ARG BRANCH=PPA-64-Update-Germinate-text-for-landing-page
 
 # Force docker to not cache the next line
 ADD https://api.github.com/repos/germinateplatform/germinate-vue/git/refs/heads/master version.json
@@ -10,7 +10,7 @@ ADD https://api.github.com/repos/germinateplatform/germinate-vue/git/refs/heads/
 RUN echo "Pulling GitHub branch: $BRANCH"
 RUN apk add --no-cache git && \
     git clone -b "$BRANCH" --single-branch --depth 1 https://github.com/germinateplatform/germinate-server.git /opt/germinate-server && \
-    git clone -b "$BRANCH" --single-branch --depth 1 https://github.com/germinateplatform/germinate-vue.git /opt/germinate-client
+    git clone -b "$BRANCH" --single-branch --depth 1 https://github.com/AustralianBioCommons/germinate-vue.git /opt/germinate-client
 
 # Build the client code
 WORKDIR /opt/germinate-client
