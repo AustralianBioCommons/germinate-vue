@@ -1,6 +1,6 @@
-<template>
-  <b-img-lazy fluid-grow class="sidebar-logo p-3" :src="storeBaseUrl + 'image/src-svg/logo.svg'" alt="Project logo" />
-</template>
+<!--<template>-->
+<!--  <b-img-lazy fluid-grow class="sidebar-logo p-3" :src="storeBaseUrl + 'image/src-svg/logo.svg'" alt="Project logo" />-->
+<!--</template>-->
 
 <script>
 import { mapGetters } from 'vuex'
