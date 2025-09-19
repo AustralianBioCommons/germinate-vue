@@ -49,11 +49,11 @@
           </b-col>
 
           <!-- Horizontal logos below, same width as login+registration -->
-          <b-col lg="7">
-            <b-card no-body class="p-4 mt-3">
-              <!-- <b-img-lazy :src="storeBaseUrl + 'image/src-svg/logo-horizontal.svg'" id="logo-horizontal" onerror="this.onerror=null;this.src='null';" alt="Project partner logo" /> -->
-            </b-card>
-          </b-col>
+<!--          <b-col lg="7">-->
+<!--            <b-card no-body class="p-4 mt-3">-->
+<!--              &lt;!&ndash; <b-img-lazy :src="storeBaseUrl + 'image/src-svg/logo-horizontal.svg'" id="logo-horizontal" onerror="this.onerror=null;this.src='null';" alt="Project partner logo" /> &ndash;&gt;-->
+<!--            </b-card>-->
+<!--          </b-col>-->
         </b-row>
       </div>
       <!-- RegistrationModal removed -->

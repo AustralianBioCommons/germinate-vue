@@ -5,6 +5,8 @@ LABEL maintainer="sebastian.raubach@hutton.ac.uk"
 ARG BRANCH=PPA-64-Update-Germinate-text-for-landing-page
 
 # Force docker to not cache the next line
+ADD https://api.github.com/repos/AustralianBioCommons/germinate-vue/git/refs/heads/${BRANCH} client_version.json
+
 ADD https://api.github.com/repos/germinateplatform/germinate-vue/git/refs/heads/master version.json
 # Clone the Germinate server code and client code
 RUN echo "Pulling GitHub branch: $BRANCH"
